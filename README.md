@@ -1,4 +1,4 @@
-# Trabalho - 2ª Unidade
+# Trabalho - 1ª Unidade
 
 Repositório contendo as especificações do Trabalho da 1ª unidade da disciplina de Sistemas operacionais.
 

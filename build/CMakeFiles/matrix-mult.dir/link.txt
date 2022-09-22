@@ -1,0 +1,1 @@
+/usr/bin/cc "CMakeFiles/matrix-mult.dir/src/auxiliate.c.o" -o matrix-mult 
