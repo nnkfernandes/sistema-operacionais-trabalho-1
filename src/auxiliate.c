@@ -50,18 +50,9 @@ int main ( int argc, char **argv )
     printf("\n");
   }
 
-  for ( i = 0; i < n2; ++i )
-  {
-    for ( j = 0; j < m2; ++j )
-    {
-      printf("%f.2 ", M2[ i ][ j ]);
-    }
-    printf("\n");
-  }
-
   FILE *fptr;
 
-  fopen("../out/data.out","w");
+  fptr = fopen("out/M1.out","w");
 
   if(fptr == NULL)
   {
@@ -69,7 +60,33 @@ int main ( int argc, char **argv )
     exit(1);
   }
 
-  fprintf(fptr,"Davi é gay");
+  fprintf(fptr,"%d %d\n", n1, m1);
+  for ( i = 0; i < n1; ++i )
+  {
+    for ( j = 0; j < m1; ++j )
+    {
+      fprintf(fptr,"c%d%d %.2f\n", i+1, j+1, M1[ i ][ j ]);
+    }
+  }
+
+  fclose(fptr);
+
+  fptr = fopen("out/M2.out","w");
+
+  if(fptr == NULL)
+  {
+    fprintf( stderr, "File doest exist!" );
+    exit(1);
+  }
+
+  fprintf(fptr,"%d %d\n", n1, m1);
+  for ( i = 0; i < n2; ++i )
+  {
+    for ( j = 0; j < m2; ++j )
+    {
+      fprintf(fptr,"c%d%d %.2f\n", i+1, j+1, M2[ i ][ j ]);
+    }
+  }
 
   fclose(fptr);
 
