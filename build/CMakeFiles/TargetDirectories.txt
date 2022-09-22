@@ -1,0 +1,3 @@
+/home/nnkfrnds/dev/ufrn/sistema-operacionais-trabalho-1/build/CMakeFiles/rebuild_cache.dir
+/home/nnkfrnds/dev/ufrn/sistema-operacionais-trabalho-1/build/CMakeFiles/edit_cache.dir
+/home/nnkfrnds/dev/ufrn/sistema-operacionais-trabalho-1/build/CMakeFiles/matrix-mult.dir
