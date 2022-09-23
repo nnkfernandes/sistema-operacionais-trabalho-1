@@ -34,16 +34,6 @@ int main( )
         }
     }
 
-    for(i = 0; i < n1; ++i)
-    {
-        for(j = 0; j < m1; ++j)
-        {
-            printf("%.2f ", M1[i][j]);
-        }
-        printf("\n");
-    }
-    
-
     fclose(filePointer);
 
     filePointer = fopen("out/m2.txt", "r"); 
@@ -61,14 +51,6 @@ int main( )
             fscanf(filePointer, "c%*d %f\n", &M2[i][j]);
         }
     }
-    for(i = 0; i < n2; ++i)
-    {
-        for(j = 0; j < m2; ++j)
-        {
-            printf("%.2f ", M2[i][j]);
-        }
-        printf("\n");
-    }
 
     fclose(filePointer);
 
@@ -85,11 +67,13 @@ int main( )
             {
                 for(int k = 0; k < m1; ++k)
                 {
-                    M3[ i ][ j ] += M1[i+k][j]*M2[i][j+k];
-                    printf("%d %d - %d %d - %d %d\n", i, j, i+k, j, i, j+k);
-                    printf("%.2f - %.2f - %.2f\n", M3[i][j], M1[i+k][j], M1[i][j+k]);
+                    M3[ i ][ j ] += M1[i][k]*M2[k][j];
+                    //printf("%d %d - %d %d - %d %d\n", i, j, i, k, k, j);
+                    //printf("%.2f - %.2f - %.2f\n", M3[i][j], M1[i+k][j], M1[i][j+k]);
                 }
+		printf("%.2f ", M3[i][j]);
             }
+	    printf("\n");
         }
     }
 

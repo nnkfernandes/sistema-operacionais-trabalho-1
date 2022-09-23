@@ -1,1 +1,0 @@
-/usr/bin/cc    CMakeFiles/matrix-mult.dir/src/sequencial.c.o  -o matrix-mult 
