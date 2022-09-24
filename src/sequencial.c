@@ -1,84 +1,38 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <errno.h>
+#include "utils.h"
 
-int main( )
+int main ()
 {
+  int rows1, rows2, columns1, columns2;
+  rows1 = rows2 = columns1 = columns2 = 3;
 
-    FILE *filePointer ;
-     
-    char dataToBeRead[100];
-    
-    filePointer = fopen("out/m1.txt", "r"); 
-    if ( filePointer == NULL )
-    {
-        printf( "m1.txt file failed to open.") ;
+  float matrix1[rows1][columns1];
+  float matrix2[rows2][columns2];
 
-        return 1;
-    }
+  float matrix3[rows1][columns2];
 
-    int n1, m1;
+  char filePath[] = "out/m1.txt";
 
-    fscanf(filePointer, "%d %d\n", &n1, &m1);
+  file_to_matrix(filePath, rows1, columns1, matrix1);
 
-    printf("n: %d, m: %d \n", n1, m1);
+  //print_matrix(3, 3, matrix1);
 
+  //if(columns1==rows2)
+  //{
+  //  for(i = 0; i < rows1; ++i)
+  //  {
+  //    for(j = 0; j < columns2; ++j)
+  //    {
+  //      M3[i][j] = 0;
+  //      for(int k = 0; k < columns1; ++k)
+  //      {
+  //        resultMatrix[ i ][ j ] += matrix1[i][k]*matrix2[k][j];
+  //        //printf("%d - %d - %d | %.2f - %.2f - %.2f\n", i, j, k, M3[i][j], M1[i][k], M2[k][j]);
+  //      }
+  //      //printf("%.2f ", M3[i][j]);
+  //    }
+  //    //printf("\n");
+  //  }
+  //}
 
-    float M1 [ n1 ][ m1 ];
-    int i, j;
-    for(i = 0; i < n1; ++i)
-    {
-        for(j = 0; j < m1; ++j)
-        {
-            fscanf(filePointer, "c%*d %f\n", &M1[i][j]);
-        }
-    }
-
-    fclose(filePointer);
-
-    filePointer = fopen("out/m2.txt", "r"); 
-
-    int n2, m2;
-
-    fscanf(filePointer, "%d %d\n", &n2, &m2);
-
-    float M2 [ n2 ][ m2 ];
-
-    for(i = 0; i < n2; ++i)
-    {
-        for(j = 0; j < m2; ++j)
-        {
-            fscanf(filePointer, "c%*d %f\n", &M2[i][j]);
-        }
-    }
-
-    fclose(filePointer);
-
-    int n3 = n1;
-    int m3 = m2;
-    float M3 [ n3 ][ m3 ];
-    
-
-    if(m1==n2)
-    {
-        for(i = 0; i < n3; ++i)
-        {
-            for(j = 0; j < m3; ++j)
-            {
-                for(int k = 0; k < m1; ++k)
-                {
-                    M3[ i ][ j ] += M1[i][k]*M2[k][j];
-                    //printf("%d %d - %d %d - %d %d\n", i, j, i, k, k, j);
-                    //printf("%.2f - %.2f - %.2f\n", M3[i][j], M1[i+k][j], M1[i][j+k]);
-                }
-		printf("%.2f ", M3[i][j]);
-            }
-	    printf("\n");
-        }
-    }
-
-
-    return 0;
+  return 0;
 }
-
- 

@@ -1,12 +1,48 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <time.h>
+#include "auxiliate.h"
 
-int main ( int argc, char **argv )
+int populate_random_matrix (int ** matrix, int rows, int columns)
 {
   srand((unsigned int)time(NULL));
 
+  for ( int i = 0; i < rows; ++i )
+  {
+    for ( int j = 0; j < columns; ++j )
+    {
+      // Create [0, 99] rowsumbers. matrix[ i ][ j ] = ((float)rand()/(float)(RAND_MAX)) * 99.0; } }
+}
+}
+}
+
+int matrix_to_file (int **  matrix, int rows, int columns, char filePath[])
+{
+  FILE *filePt;
+
+  filePt = fopen(filePath, "w");
+
+  if(filePt == NULL)
+  {
+    fprintf( stderr, "File doest exist!" );
+    return -1;
+  }
+
+  fprintf(filePt,"%d %d\n", rows, columns);
+
+  for ( int i = 0; i < rows; ++i )
+  {
+    for ( int j = 0; j < columns; ++j )
+    {
+      fprintf(filePt,"c%d%d %.2f\n", i+1, j+1,  matrix[ i ][ j ]);
+    }
+  }
+
+  fclose(filePt);
+
+  return 0;
+}
+
+int main ( int argc, char **argv )
+{
+  printf("in main");
   // Checks if 4 arguments were given.
   if ( argc != 5 )
   {
@@ -21,74 +57,7 @@ int main ( int argc, char **argv )
   m2 = atoi( argv[4] );
 
   float M1[ n1 ][ m1 ], M2[ n2 ][ m2 ];
-  int i, j;
 
-  // Populate M1.
-  for ( i = 0; i < n1; ++i )
-  {
-    for ( j = 0; j < m1; ++j )
-    {
-      M1[ i ][ j ] = ((float)rand()/(float)(RAND_MAX)) * 99.0;
-    }
-  }
-
-  // Populate M2.
-  for ( i = 0; i < n2; ++i )
-  {
-    for ( j = 0; j < m2; ++j )
-    {
-      M2[ i ][ j ] = ((float)rand()/(float)(RAND_MAX)) * 99.0;
-    }
-  }
-
-  for ( i = 0; i < n1; ++i )
-  {
-    for ( j = 0; j < m1; ++j )
-    {
-      printf("%f.2 ", M1[ i ][ j ]);
-    }
-    printf("\n");
-  }
-
-  FILE *fptr;
-
-  fptr = fopen("out/M1.out","w");
-
-  if(fptr == NULL)
-  {
-    fprintf( stderr, "File doest exist!" );
-    exit(1);
-  }
-
-  fprintf(fptr,"%d %d\n", n1, m1);
-  for ( i = 0; i < n1; ++i )
-  {
-    for ( j = 0; j < m1; ++j )
-    {
-      fprintf(fptr,"c%d%d %.2f\n", i+1, j+1, M1[ i ][ j ]);
-    }
-  }
-
-  fclose(fptr);
-
-  fptr = fopen("out/M2.out","w");
-
-  if(fptr == NULL)
-  {
-    fprintf( stderr, "File doest exist!" );
-    exit(1);
-  }
-
-  fprintf(fptr,"%d %d\n", n1, m1);
-  for ( i = 0; i < n2; ++i )
-  {
-    for ( j = 0; j < m2; ++j )
-    {
-      fprintf(fptr,"c%d%d %.2f\n", i+1, j+1, M2[ i ][ j ]);
-    }
-  }
-
-  fclose(fptr);
-
+  printf("Hello\n");
   return 0;
 }
