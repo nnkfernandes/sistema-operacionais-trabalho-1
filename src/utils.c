@@ -1,8 +1,34 @@
 #include "utils.h"
 
+int matrix_to_file ( char filePath[], int rows, int columns, float matrix[ rows ][ columns ])
+{
+  FILE *filePt;
+
+  filePt = fopen(filePath, "w");
+
+  if(filePt == NULL)
+  {
+    fprintf( stderr, "File doest exist!" );
+    return -1;
+  }
+
+  fprintf(filePt,"%d %d\n", rows, columns);
+
+  for ( int i = 0; i < rows; ++i )
+  {
+    for ( int j = 0; j < columns; ++j )
+    {
+      fprintf(filePt,"c%d%d %.2f\n", i+1, j+1,  matrix[ i ][ j ]);
+    }
+  }
+
+  fclose(filePt);
+
+  return 0;
+}
+
 int file_to_matrix ( char filePath[], int rows, int columns, float matrix[rows][columns])
 {
-  printf("hello");
   FILE * filePt ;
 
   char dataToBeRead[100];
@@ -28,8 +54,6 @@ int file_to_matrix ( char filePath[], int rows, int columns, float matrix[rows][
   }
 
   fclose(filePt);
-
-  print_matrix(3, 3, matrix);
 
   return 0;
 }

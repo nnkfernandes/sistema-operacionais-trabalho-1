@@ -3,8 +3,6 @@
 
 #include "utils.h"
 
-int populate_random_matrix (int ** matrix, int rows, int columns);
-
-int matrix_to_file (int **  matrix, int rows, int columns, char filePath[]);
+int populate_random_matrix (int rows, int columns, float matrix [ rows ][ columns ]);
 
 #endif

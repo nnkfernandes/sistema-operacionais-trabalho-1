@@ -10,7 +10,7 @@ int main ()
 
   float matrix3[rows1][columns2];
 
-  file_to_matrix("out/m1.txt", rows1, columns1, matrix1);
+  file_to_matrix("out/M1.out", rows1, columns1, matrix1);
 
   print_matrix(3, 3, matrix1);
 
