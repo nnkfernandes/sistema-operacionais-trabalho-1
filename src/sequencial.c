@@ -10,11 +10,9 @@ int main ()
 
   float matrix3[rows1][columns2];
 
-  char filePath[] = "out/m1.txt";
+  file_to_matrix("out/m1.txt", rows1, columns1, matrix1);
 
-  file_to_matrix(rows1, columns1, matrix1);
-
-  //print_matrix(3, 3, matrix1);
+  print_matrix(3, 3, matrix1);
 
   //if(columns1==rows2)
   //{

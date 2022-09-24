@@ -1,17 +1,17 @@
 #include "utils.h"
 
-int file_to_matrix ( int rows, int columns, float matrix[rows][columns])
+int file_to_matrix ( char filePath[], int rows, int columns, float matrix[rows][columns])
 {
   printf("hello");
   FILE * filePt ;
 
   char dataToBeRead[100];
 
-  filePt = fopen("out/m1.txt", "r"); 
+  filePt = fopen(filePath, "r"); 
 
   if ( filePt == NULL )
   {
-    printf("%s file failed to open.", "out/m1.txt");
+    printf("%s file failed to open.", filePath);
     return -1;
   }
 
