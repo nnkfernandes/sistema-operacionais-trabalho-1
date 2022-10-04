@@ -1,7 +1,12 @@
 #include "utils.h"
 
-int main ()
+int main ( int argc, char **argv )
 {
+
+  printf("%s - %s", argv[1], argv[2]);
+//int file_to_matrix ( char filePath[], int rows, int columns, float matrix[rows][columns])
+
+  //file_to_matrix(
   int rows1, rows2, columns1, columns2;
   rows1 = rows2 = columns1 = columns2 = 3;
 
