@@ -7,7 +7,8 @@ int populate_random_matrix (int rows, int columns, float matrix [ rows ][ column
     for ( int j = 0; j < columns; ++j )
     {
       // Create [0, 99] rowsumbers.
-      matrix[ i ][ j ] = ((float)rand()/(float)(RAND_MAX)) * 99.0;
+      //matrix[ i ][ j ] = ((float)rand()/(float)(RAND_MAX)) * 99.0;
+      matrix[ i ][ j ] = 2;
     }
   }
 }

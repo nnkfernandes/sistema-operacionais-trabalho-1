@@ -27,7 +27,7 @@ int matrix_to_file ( char filePath[], int rows, int columns, float matrix[ rows 
   return 0;
 }
 
-int file_to_matrix ( char filePath[], int rows, int columns, float matrix[rows][columns])
+float** file_to_matrix (char filePath[], int* rows, int* columns)
 {
   FILE * filePt ;
 
@@ -38,33 +38,42 @@ int file_to_matrix ( char filePath[], int rows, int columns, float matrix[rows][
   if ( filePt == NULL )
   {
     printf("%s file failed to open.", filePath);
-    return -1;
+    exit( -1 );
   }
 
-  fscanf(filePt, "%d %d\n", &rows, &columns);
+  fscanf(filePt, "%d %d\n", rows, columns);
 
-  printf("n: %d, m: %d \n", rows, columns);
+  printf("n: %d, m: %d \n", *rows, *columns);
 
-  for(int i = 0; i < rows; ++i)
+  float** matrix = (float**)calloc(*rows, sizeof(float*));
+
+  if (matrix == NULL) {
+    printf("Unable to allocate memory\n");
+    exit( -1 );
+  }
+
+  for(int i = 0; i < *rows; ++i)
   {
-    for(int j = 0; j < columns; ++j)
+    matrix[i] = (float*)calloc(*columns, sizeof(float));
+    for(int j = 0; j < *columns; ++j)
     {
       fscanf(filePt, "c%*d %f\n", &matrix[i][j]);
+      printf("[%d, %d]: %.2f\n", i, j, matrix[i][j]);
     }
   }
 
   fclose(filePt);
 
-  return 0;
+  return matrix;
 }
 
-void print_matrix ( int rows, int columns, float matrix[ rows ][ columns ])
+void print_matrix ( int rows, int columns, float** matrix)
 {
   for ( int i = 0; i < rows; ++i )
   {
     for ( int j = 0; j < columns; ++j )
     {
-      printf("[%d, %d] = %.2f\n", i, j, matrix[i][j]);
+      printf("[%d, %d]: %.2f\n", i, j, matrix[i][j]);
     }
   }
 }
