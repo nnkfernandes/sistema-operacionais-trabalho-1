@@ -1,4 +1,5 @@
 #include "utils.h"
+#include <time.h>
 
 int main ( int argc, char **argv )
 {
@@ -18,11 +19,12 @@ int main ( int argc, char **argv )
   //print_matrix(columns1, rows1, matrix1);
   //print_matrix(columns2, rows2, matrix2);
 
-  // Multiply the matrix
+  // Multiply the matrices
 
   if(columns1==rows2)
   {
     float resultMatrix[rows2][columns1];
+    clock_t time = clock();
     for(int i = 0; i < rows1; ++i)
     {
       for(int j = 0; j < columns2; ++j)
@@ -31,17 +33,19 @@ int main ( int argc, char **argv )
         for(int k = 0; k < columns1; ++k)
         {
           resultMatrix[ i ][ j ] += matrix1[i][k]*matrix2[k][j];
-          printf("%d - %d - %d | %.2f - %.2f - %.2f\n", i, j, k, resultMatrix[i][j], matrix1[i][k], matrix2[k][j]);
+          //printf("%d - %d - %d | %.2f - %.2f - %.2f\n", i, j, k, resultMatrix[i][j], matrix1[i][k], matrix2[k][j]);
         }
       }
     }
+    time = clock() - time;
+    double cpuTimeUsed = ((double) time) / CLOCKS_PER_SEC;
     matrix_to_file ( "out/matrix-3-seq.out", rows2, columns1, resultMatrix);
+    cpu_time_to_file("out/matrix-3-seq.out", cpuTimeUsed);
   }
   else {
     fprintf( stderr, "Can't multiply the matrices. columns1!=rows2" );
     exit( -1 );
   }
-
 
   for (int i = 0; i < rows1; i++)
     free(matrix1[i]);

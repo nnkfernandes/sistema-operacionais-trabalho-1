@@ -26,6 +26,24 @@ int matrix_to_file ( char filePath[], int rows, int columns, float matrix[ rows 
 
   return 0;
 }
+int cpu_time_to_file(char filePath[], double cpuTimeUsed) {
+
+  FILE *filePt;
+
+  filePt = fopen(filePath, "a");
+
+  if(filePt == NULL)
+  {
+    fprintf( stderr, "File doest exist!" );
+    return -1;
+  }
+
+  fprintf(filePt,"Took %f seconds to execute.\n", cpuTimeUsed);
+
+  fclose(filePt);
+
+  return 0;
+}
 
 float** file_to_matrix (char filePath[], int* rows, int* columns)
 {
@@ -43,7 +61,7 @@ float** file_to_matrix (char filePath[], int* rows, int* columns)
 
   fscanf(filePt, "%d %d\n", rows, columns);
 
-  printf("n: %d, m: %d \n", *rows, *columns);
+  //printf("n: %d, m: %d \n", *rows, *columns);
 
   float** matrix = (float**)calloc(*rows, sizeof(float*));
 
@@ -58,7 +76,7 @@ float** file_to_matrix (char filePath[], int* rows, int* columns)
     for(int j = 0; j < *columns; ++j)
     {
       fscanf(filePt, "c%*d %f\n", &matrix[i][j]);
-      printf("[%d, %d]: %.2f\n", i, j, matrix[i][j]);
+      //printf("[%d, %d]: %.2f\n", i, j, matrix[i][j]);
     }
   }
 
