@@ -1,6 +1,6 @@
 #include "utils.h"
 
-int matrix_to_file ( char filePath[], int rows, int columns, float matrix[ rows ][ columns ])
+int matrix_to_file ( char filePath[], int rows, int columns, double** matrix)
 {
   FILE *filePt;
 
@@ -26,6 +26,7 @@ int matrix_to_file ( char filePath[], int rows, int columns, float matrix[ rows 
 
   return 0;
 }
+
 int cpu_time_to_file(char filePath[], double cpuTimeUsed) {
 
   FILE *filePt;
@@ -45,7 +46,7 @@ int cpu_time_to_file(char filePath[], double cpuTimeUsed) {
   return 0;
 }
 
-float** file_to_matrix (char filePath[], int* rows, int* columns)
+double** file_to_matrix (char filePath[], int* rows, int* columns)
 {
   FILE * filePt ;
 
@@ -61,9 +62,9 @@ float** file_to_matrix (char filePath[], int* rows, int* columns)
 
   fscanf(filePt, "%d %d\n", rows, columns);
 
-  //printf("n: %d, m: %d \n", *rows, *columns);
+  printf("n: %d, m: %d \n", *rows, *columns);
 
-  float** matrix = (float**)calloc(*rows, sizeof(float*));
+  double** matrix = (double**)calloc(*rows, sizeof(double*));
 
   if (matrix == NULL) {
     printf("Unable to allocate memory\n");
@@ -72,11 +73,10 @@ float** file_to_matrix (char filePath[], int* rows, int* columns)
 
   for(int i = 0; i < *rows; ++i)
   {
-    matrix[i] = (float*)calloc(*columns, sizeof(float));
+    matrix[i] = (double*)calloc(*columns, sizeof(double));
     for(int j = 0; j < *columns; ++j)
     {
-      fscanf(filePt, "c%*d %f\n", &matrix[i][j]);
-      //printf("[%d, %d]: %.2f\n", i, j, matrix[i][j]);
+      fscanf(filePt, "c%*d %lf\n", &matrix[i][j]);
     }
   }
 
@@ -85,7 +85,7 @@ float** file_to_matrix (char filePath[], int* rows, int* columns)
   return matrix;
 }
 
-void print_matrix ( int rows, int columns, float** matrix)
+void print_matrix ( int rows, int columns, double** matrix)
 {
   for ( int i = 0; i < rows; ++i )
   {
