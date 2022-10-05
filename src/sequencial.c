@@ -28,13 +28,13 @@ int main ( int argc, char **argv )
     clock_t time = clock();
     for(int i = 0; i < rows1; ++i)
     {
+      resultMatrix[i] = (double*)calloc(columns1, sizeof(double));
       for(int j = 0; j < columns2; ++j)
       {
-        resultMatrix[i] = (double*)calloc(columns1, sizeof(double));
         for(int k = 0; k < columns1; ++k)
         {
           resultMatrix[ i ][ j ] += matrix1[i][k] * matrix2[k][j];
-          //printf("%d - %d - %d | %.2f - %.2f - %.2f\n", i, j, k, resultMatrix[i][j], matrix1[i][k], matrix2[k][j]);
+          printf("%d - %d - %d | %.2f - %.2f - %.2f\n", i, j, k, resultMatrix[i][j], matrix1[i][k], matrix2[k][j]);
         }
       }
     }

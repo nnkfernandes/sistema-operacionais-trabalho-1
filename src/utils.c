@@ -18,7 +18,7 @@ int matrix_to_file ( char filePath[], int rows, int columns, double** matrix)
   {
     for ( int j = 0; j < columns; ++j )
     {
-      fprintf(filePt,"c%d%d %.2f\n", i+1, j+1,  matrix[ i ][ j ]);
+      fprintf(filePt,"c%d%d %.2lf\n", i+1, j+1,  matrix[ i ][ j ]);
     }
   }
 
