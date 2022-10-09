@@ -12,5 +12,7 @@ add_executable( seq src/sequencial.c )
 target_link_libraries( seq libs )
 add_executable( aux src/auxiliate.c )
 target_link_libraries( aux libs )
+add_executable( thre src/threads.c )
+target_link_libraries( thre libs )
 
-set(CMAKE_CXX_FLAGS "-Wall -g -fsanitize=address -lm")
+set(CMAKE_CXX_FLAGS "-Wall -g -pthread -fsanitize=address -lm")
