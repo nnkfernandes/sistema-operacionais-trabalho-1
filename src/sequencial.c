@@ -38,16 +38,10 @@ int main ( int argc, char** argv )
         }
       }
     }
-
-    print_matrix ( rows1, columns2, resultMatrix );
-    printf ( "End multi\n" );
     time = clock() - time;
     double cpuTimeUsed = ( ( double ) time ) / CLOCKS_PER_SEC;
-    printf ( "End multi\n" );
     matrix_to_file ( "out/matrix-3-seq.out", rows1, columns2, resultMatrix );
-    printf ( "End multi\n" );
     cpu_time_to_file ( "out/matrix-3-seq.out", cpuTimeUsed );
-    printf ( "End multi\n" );
   }
   else
   {

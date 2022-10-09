@@ -1,6 +1,7 @@
 #include "utils.h"
 #include <time.h>
 #include <pthread.h>
+#include <string.h>
 
 struct threadData
 {
@@ -13,15 +14,11 @@ struct threadData
   int start;
   int end;
   int threadNum;
+  char filePath[100];
 };
 
 void* multiply_matrices ( void* threadArgs )
 {
-
-  //time = clock() - time;
-  //double cpuTimeUsed = ( ( double ) time ) / CLOCKS_PER_SEC;
-  //matrix_to_file ( "out/matrix-3-seq.out", rows2, columns1, resultMatrix );
-  //cpu_time_to_file ( "out/matrix-3-seq.out", cpuTimeUsed );
   struct threadData* data;
   data = ( struct threadData* ) threadArgs;
 
@@ -34,11 +31,17 @@ void* multiply_matrices ( void* threadArgs )
   int start = data->start;
   int end = data->end;
   int threadNum = data->threadNum;
+  char filePath[100];
+  strcpy(filePath, data->filePath);
 
   int i;
   int j;
+  printf ( "file: %s\n", filePath);
   printf ( "%d - %d - %d\n", threadNum, start, end );
 
+  clock_t time = clock();
+
+  // TODO: create fake matrix
   while ( start < end+1 )
   {
     i = start/columns2;
@@ -53,7 +56,10 @@ void* multiply_matrices ( void* threadArgs )
              threadNum, i, j, resultMatrix[i][j], matrix1[i][j], matrix2[i][j] );
     ++start;
   }
-
+  time = clock() - time;
+  double cpuTimeUsed = ( ( double ) time ) / CLOCKS_PER_SEC;
+  matrix_to_file ( filePath, rows1, columns2, resultMatrix );
+  cpu_time_to_file ( filePath, cpuTimeUsed );
 }
 
 int main ( int argc, char** argv )
@@ -85,7 +91,7 @@ int main ( int argc, char** argv )
     int elPerPart = ( matrixSize / partitions ) - 1;
     int partRemaind = matrixSize % partitions;
 
-    printf ( "In main: %d - %d - %d\n", matrixSize, elPerPart, partRemaind );
+    //printf ( "In main: %d - %d - %d\n", matrixSize, elPerPart, partRemaind );
 
     int start = 0;
 
@@ -107,6 +113,8 @@ int main ( int argc, char** argv )
       data[i].rows2 = rows2;
       data[i].start = start;
       data[i].end = start + elPerPart;
+      snprintf(data[i].filePath, 100, "out/matrix-3-threa-%d.out", i);
+
       if ( i == partitions - 1 )
         data[i].end += partRemaind;
       data[i].threadNum = i;
@@ -127,7 +135,6 @@ int main ( int argc, char** argv )
         exit ( -3 );
       }
     }
-
   }
   else
   {
